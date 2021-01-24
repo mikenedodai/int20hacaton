@@ -6,8 +6,8 @@ using Site.Models;
 
 namespace Site.Interfaces
 {
-    interface IBuckwheat
+    public interface IBuckwheat
     {
-        IEnumerable<BuckwheatItem> BuckwheatItems { get; set; }
+        IEnumerable<BuckwheatItem> BuckwheatItems { get; }
     }
 }

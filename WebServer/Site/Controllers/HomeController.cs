@@ -15,14 +15,16 @@ namespace Site.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IBuckwheat _allBuckwheatItems;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBuckwheat buckwheat)
         {
             _logger = logger;
+            _allBuckwheatItems = buckwheat;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var buckwheat = _allBuckwheatItems.BuckwheatItems;
+            return View(buckwheat);
         }
 
         public IActionResult Privacy()
