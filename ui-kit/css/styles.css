@@ -1,0 +1,95 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: url("../images/buckwheat.jpg");
+	background-size: cover;
+}
+
+.container{
+	margin: 1% auto;
+	max-width: 80%;
+}
+
+header{
+	margin-right: 8px;
+	margin-left: 8px;
+	background: #f0f0f0;
+	border-radius: 6px;
+	opacity: 85%;
+}
+
+header div{
+	margin: 0 auto;
+}
+
+header a {
+	margin: 0 auto;
+	text-align: center;
+	display: block;
+	width: min-content;
+	line-height: 48pt;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 32pt;
+	color: #4f4f4f;
+	text-decoration: none;
+	transition: all 0.5s;
+}
+
+header a:hover{
+	color: #fff;
+}
+
+.items {
+	padding: 8px;
+}
+
+.item-buckwheat {
+	min-height: 100px;
+	padding: 8px;
+}
+
+.item-buckwheat .image-wrapper{
+	display: block;
+}
+
+
+.item-buckwheat .image-wrapper img{
+	display: block;
+	width: 100%;
+}
+
+.item-buckwheat .content{
+	padding: 8px;
+	margin: 0;
+	border-radius: 6px;
+	opacity: 85%;
+	background: #f0f0f0;
+	overflow: hidden;
+}
+
+.plot h3 {
+	margin: 0 auto;
+	text-align: center;
+	line-height: 42pt;
+	font-family: 'Open Sans', sans-serif;
+	font-style: bold;
+	font-size: 18pt;
+}
+
+.plot .plot-container
+{
+	margin-right: 8px;
+	margin-left: 8px;
+	background: #f0f0f0;
+	border-radius: 6px;
+	opacity: 85%;
+}
+
+.plot-container #myChart
+{
+	display: block;
+	padding: 16px;
+}
