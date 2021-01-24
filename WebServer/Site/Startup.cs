@@ -28,6 +28,7 @@ namespace Site
             services.AddControllersWithViews();
             services.AddDbContext<ItemsContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("PricesContext")));
+            services.AddScoped<IItemsRepository, ItemsesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
