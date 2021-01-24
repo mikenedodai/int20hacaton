@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Site.Models;
+using Site.Interfaces;
 
 namespace Site.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBuckwheat _allBuckwheatItems;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -33,5 +35,7 @@ namespace Site.Controllers
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
+
+
     }
 }
