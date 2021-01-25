@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Site.Models;
 
 namespace Site.Domain
 {

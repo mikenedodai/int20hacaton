@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Site.Domain
+namespace Site.Models
 {
     public class Item
     {

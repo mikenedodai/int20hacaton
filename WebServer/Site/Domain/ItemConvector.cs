@@ -1,4 +1,5 @@
 using System;
+using Site.Models;
 
 namespace Site.Domain
 {
