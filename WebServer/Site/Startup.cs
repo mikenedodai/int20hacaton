@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Site.Domain;
+using Site.Models;
+using Site.Interfaces;
+using Site.Mocks;
 
 namespace Site
 {
@@ -28,6 +31,7 @@ namespace Site
             services.AddControllersWithViews();
             services.AddDbContext<ItemsContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("PricesContext")));
+            services.AddTransient<IBuckwheat, MockBuckwheatItem>();
             services.AddScoped<IItemsRepository, ItemsesRepository>();
         }
 

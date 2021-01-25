@@ -1,8 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Site.Models
+@model IEnumerable<BuckwheatItem>
+
+@{
+    ViewData["Title"] = "Flex&Grecha";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="items row">
+
+    @{
+        foreach (var buckwheat in Model)
+        {
+            <div class="item-buckwheat col-xs-12 col-md-6 col-lg-4">
+                <div class="content row">
+                    <div class="image-wrapper col-xs-6">
+                        <img src="@buckwheat.imgUrl" alt="">
+                    </div>
+                    <div class="information col-xs-6">
+                        <ul>
+                            <li class="item-name">Назва: @buckwheat.name</li>
+                            <li class="item-value">Вартість: @buckwheat.price.ToString("c")/кг</li>
+                            <li class="shop-name">Магазин: @buckwheat.shopName </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }
+
+</section>
+
+<section class="plot">
+    <div class="plot-container">
+        <h3>График цен на гречку</h3>
+        <canvas id="myChart"></canvas>
+        <script>
+
+        </script>
+    </div>
+</section>
