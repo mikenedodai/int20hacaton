@@ -24,7 +24,7 @@ namespace Site.Controllers
         public IActionResult Index()
         {
             var items = _repository.GetLastItems();
-            return View();
+            return View(items);
         }
 
         public IActionResult Privacy()

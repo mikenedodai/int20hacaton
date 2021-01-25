@@ -34,6 +34,8 @@ namespace Site.Domain
         public IList<Item> GetLastItems()
         {
             var last = _dbContext.Items.OrderByDescending(x => x.Time).FirstOrDefault();
+            if (last == null)
+                return new List<Item>(0);
             return _dbContext.Items.Where(i => i.Time == last.Time).OrderBy(i => i.Price).ToList();
         }
 

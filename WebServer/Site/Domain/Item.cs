@@ -13,5 +13,6 @@ namespace Site.Domain
         public decimal Price { get; set; }
         [DataType(DataType.Time)]
         public DateTime Time { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
