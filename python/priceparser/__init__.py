@@ -11,6 +11,7 @@ import gc
 import json
 import re
 import azure.functions as func
+
 #%%
 def parse_weight(weight):
     try:
@@ -202,10 +203,13 @@ def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().replace(
         tzinfo=datetime.timezone.utc).isoformat()
 
-    results = json.dumps({"items":main_parse()}, ensure_ascii=False)
-
     if mytimer.past_due:
-        logging.info('The timer is past due!')
-        logging.info(f'result:' {results})
-
+        try:
+            logging.info('The timer is past due!')
+            results = json.dumps({"items":main_parse()}, ensure_ascii=False) 
+            url = "https://flexgrecha.azurewebsites.net/api/parser"
+            request.post(url, json=results)
+            #logging.info(f'result:'results
+        except Exception as e:
+            logging.info(e)
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
