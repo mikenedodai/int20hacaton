@@ -74,7 +74,7 @@ def auchan_parser():
 
     return price,per_kg_price, product_title, product_weight, images
 
-auchan_parser()
+#auchan_parser()
 # %%
 def epicentric_parser():
     url = requests.get('https://epicentrk.ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/')
@@ -89,9 +89,6 @@ def epicentric_parser():
     for a in soup.find_all('a', {'class' : 'card__photo'}):
         if a.img:
             images.append(a.img['src'])
-
-    print(len(images))
-    print(len(product_title))
 
     price = soup.find_all('span', {'class' : 'card__price-sum'})
     price = [parse_price(span.get_text()) for span in price]
@@ -113,7 +110,7 @@ def epicentric_parser():
             per_kg_price.append("None")
 
     return price, per_kg_price, product_title, product_weight, images
-epicentric_parser()
+#epicentric_parser()
 # %%
 def fozzy_parser():
     url = requests.get('https://fozzyshop.ua/300143-krupa-grechnevaya')
@@ -129,9 +126,6 @@ def fozzy_parser():
     for a in soup.find_all('a', {'class' : 'thumbnail product-thumbnail'}):
         if a.img:
             images.append(a.img['src'])
-
-    print(len(images))
-    print(len(product_title))
     
     price = soup.find_all('div', {'class': 'product-price-and-shipping'})
     price = [parse_price(span.get_text()) for span in price]
@@ -155,15 +149,52 @@ def fozzy_parser():
 
     return price,per_kg_price, product_title, product_weight, images
 
-fozzy_parser()
+#fozzy_parser()
 #%%
 def main_parse():
     ach_price, ach_kg_price, ach_title, ach_weight, ach_images = auchan_parser()
     epi_price, epi_kg_price, epi_title, epi_weight, epi_images = epicentric_parser()
     foz_price, foz_kg_price, foz_title, foz_weight, foz_images = fozzy_parser()
 
-    
+    '''final_prices = []
+    final_names  = []
+    final_images = []
+    final_naming = []
 
+    final_prices.extend(ach_price)
+    final_prices.extend(epi_price)
+    final_prices.extend(foz_price)
+
+    final_names.extend(ach_title)
+    final_names.extend(epi_title)
+    final_names.extend(foz_title)
+
+    final_images.extend(ach_images)
+    final_images.extend(epi_images)
+    final_images.extend(foz_images)
+
+    final_naming.extend(['Auchan' for i in range(len(ach_price))])
+    final_naming.extend(['Epicentric' for i in range(len(epi_price))])
+    final_naming.extend(['Fozzy' for i in range(len(foz_price))])
+    #filan_naming = [['Auchan' for i in range(len(ach_price))], ['Epicentric' for i in range(len(epi_price))], ['Fozzy' for i in range(len(foz_price))]]'''
+
+    result = []
+    for idx, f in enumerate(ach_price):
+        result_dict = {"StoreName": "Auchan", "Name":ach_title[idx], "StoreURL":"none", "ImageURL":ach_images[idx], "Price":ach_price[idx]}
+        result.append(result_dict)
+
+    for idx, f in enumerate(epi_price):
+        result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreURL":"none", "ImageURL":epi_images[idx], "Price":epi_price[idx]}
+        result.append(result_dict)
+
+    for idx, f in enumerate(ach_price):
+        result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreURL":"none", "ImageURL":foz_images[idx], "Price":foz_price[idx]}
+        result.append(result_dict)
+
+
+    return json.dumps({"items":result}, ensure_ascii=False)
+
+#main_parse()
 #%%
 '''for i in range(len(ach_price)):
     print("\n")
