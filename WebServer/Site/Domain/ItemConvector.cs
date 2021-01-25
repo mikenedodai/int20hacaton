@@ -14,7 +14,8 @@ namespace Site.Domain
                 Price = itemDto.Price,
                 StoreUrl = itemDto.StoreUrl,
                 Time = timeSpan,
-                ImageUrl = itemDto.ImageUrl
+                ImageUrl = itemDto.ImageUrl,
+                PricePerKg = itemDto.PricePerKg
             };
         }
     }

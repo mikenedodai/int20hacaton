@@ -25,12 +25,13 @@ namespace Site.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> ImportItems([FromBody] ItemDto[] itemDtos)
+        public async Task<IActionResult> ImportItems([FromBody] ItemsDto itemsDto)
         {
-            if (itemDtos == null)
+            if (itemsDto == null)
                 return NoContent();
             var time = DateTime.Now;
-            var items = itemDtos.Select((item, idx) => ItemConvector.Convert(item, time));
+            var items = itemsDto.items
+                .Select((item, idx) => ItemConvector.Convert(item, time));
             return Ok(await _repository.Insert(items));
         } 
     }

@@ -11,6 +11,8 @@ namespace Site.Models
         public string Name { get; set; }
         public string StoreUrl { get; set; }
         public decimal Price { get; set; }
+        
+        public decimal PricePerKg { get; set; }
         [DataType(DataType.Time)]
         public DateTime Time { get; set; }
         public string ImageUrl { get; set; }
