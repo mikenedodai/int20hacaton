@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Site.Models;
 
 namespace Site.Domain
 {

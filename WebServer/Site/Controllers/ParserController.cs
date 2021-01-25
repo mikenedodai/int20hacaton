@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,12 +11,11 @@ namespace Site.Controllers
     public class ParserController : Controller
     {
         private readonly ILogger<ParserController> _logger;
-        private readonly ItemsRepository _itemsRepository;
-        public ParserController(ILogger<ParserController> logger, ItemsContext itemsContext)
+        private readonly IItemsRepository _repository;
+        public ParserController(ILogger<ParserController> logger, IItemsRepository repository)
         {
             _logger = logger;
-            Console.WriteLine($"Database name = {itemsContext.Database}");
-            _itemsRepository = new ItemsRepository(itemsContext);
+            _repository = repository;
         }
         
         [HttpGet]
@@ -25,12 +25,14 @@ namespace Site.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> ImportItems([FromBody] ItemDto[] dto)
+        public async Task<IActionResult> ImportItems([FromBody] ItemsDto itemsDto)
         {
-            Console.WriteLine("Process items");
-            if (dto == null)
+            if (itemsDto == null)
                 return NoContent();
-            return Ok(await _itemsRepository.Insert(dto));
+            var time = DateTime.Now;
+            var items = itemsDto.items
+                .Select((item, idx) => ItemConvector.Convert(item, time));
+            return Ok(await _repository.Insert(items));
         } 
     }
     

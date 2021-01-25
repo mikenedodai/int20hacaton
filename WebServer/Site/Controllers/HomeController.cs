@@ -5,26 +5,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Site.Domain;
 using Site.Models;
-using Site.Interfaces;
 
 namespace Site.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IBuckwheat _allBuckwheatItems;
+        private readonly IItemsRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger, IBuckwheat buckwheat)
+        public HomeController(ILogger<HomeController> logger, IItemsRepository repository)
         {
             _logger = logger;
-            _allBuckwheatItems = buckwheat;
+            _repository = repository;
         }
 
         public IActionResult Index()
         {
-            var buckwheat = _allBuckwheatItems.BuckwheatItems;
-            return View(buckwheat);
+            var items = _repository.GetLastItems();
+            return View(items);
         }
 
         public IActionResult Privacy()
@@ -37,7 +37,5 @@ namespace Site.Controllers
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
-
-
     }
 }
