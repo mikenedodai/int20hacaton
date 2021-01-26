@@ -1,5 +1,5 @@
 # int20hacaton  
-# Grechka Aggregator
+# FlexGrechka
 Репозиторій команди `FlexCommit`.
 
 Посилання на сайт https://flexgrecha.azurewebsites.net/  
