@@ -17,12 +17,11 @@
                     <div class="information col-12">
                         <ul>
                             <li class="item-name">Назва: @item.Name</li>
-                            <li class="item-value">Вартість: @item.Price.ToString() грн/кг</li>
+                            <li class="item-value">Ціна: @item.Price.ToString()</li>
+                            <li class="item-value">Вартість за кг: @item.PricePerKg.ToString() грн/кг</li>
                             <li class="shop-name">Магазин: <a href="@item.StoreUrl">@item.StoreName</a></li>
-
                         </ul>
                     </div>
-
                 </div>
             </div>
         }
