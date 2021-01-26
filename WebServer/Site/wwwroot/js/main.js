@@ -46,8 +46,8 @@ async function process() {
 
 	var response = await fetchAsync(url);//'{"dates": ["23.01", "22.01", "23.01"],"prices":[35.3, 32.2, 35.4] }';
 
-	let dateArray = response.dates;
-	let chartData = response.prices.map(i => Number(i.replace(',', '.')));
+	let dateArray = response.dates.reverse();
+	let chartData = response.prices.map(i => Number(i.replace(',', '.'))).reverse();
 
 	console.log(chartData);
 	
