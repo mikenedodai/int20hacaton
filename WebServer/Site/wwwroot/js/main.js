@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+
 function buildChart(dateArray, chartData) {
 	let ctx = document.getElementById('myChart').getContext('2d');
 	var myChart = new Chart(ctx, {
@@ -12,10 +13,14 @@ function buildChart(dateArray, chartData) {
 			datasets: [{
 				label: '',
 				data: chartData,
-				borderWidth: 1
+				borderWidth: 1,
+				backgroundColor: "#a7572b"
 			}]
 		},
 		options: {
+			legend: {
+				display: false
+			},
 			scales: {
 				yAxes: [{
 					ticks: {
@@ -36,8 +41,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		imgs[i].height = heightStandard;
 	}
 
-	let dateArray = ['21', '22', '23', '24', '25', '26'];
-	let chartData = [20, 21, 19.9, 19.1, 22.5, 20];
+	var response = fetchAsync("");//'{"dates": ["23.01", "22.01", "23.01"],"prices":[35.3, 32.2, 35.4] }';
+
+	var jsonData = JSON.parse(response);
+
+	console.log(jsonData);
+
+	let dateArray = jsonData.dates;
+	let chartData = jsonData.prices;
 
 	buildChart(dateArray, chartData);
 });
+
+async function fetchAsync(url) {
+	let response = await fetch(url);
+	let data = await response.json();
+	return data;
+}
