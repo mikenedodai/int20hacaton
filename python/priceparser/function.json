@@ -5,10 +5,6 @@
       "name": "mytimer",
       "type": "timerTrigger",
       "direction": "in",
-      "methods": [
-        "get",
-        "post"
-      ],
       "schedule": "0 */30 * * * *"
     }
   ]

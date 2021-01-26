@@ -186,14 +186,22 @@ def main_parse():
 def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().replace(
         tzinfo=datetime.timezone.utc).isoformat()
-
-    if mytimer.past_due:
+    try:
+        if mytimer.past_due:
             logging.info('The timer is past due!')
-            headers = {'Content-type': 'application/json'}
-            parser_res = main_parse()
-            results = json.dumps({"items":parser_res})
-            url = "https://flexgrecha.azurewebsites.net/api/parser"
-            r = requests.post(url, json = {"items":parser_res}, headers = headers, verify=False)
-            logging.info(r)
+        headers = {'Content-type': 'application/json'}
+        parser_res = main_parse()
+        results = json.dumps({"items":parser_res})
+        url = "https://flexgrecha.azurewebsites.net/api/parser"
+        r = requests.post(url, json = {"items":parser_res}, headers = headers, verify=False)
+        logging.info(r)
+    except Exception as e:
+        logging.warning(e)
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
+# %%
+#headers = {'Content-type': 'application/json'}
+#parser_res = main_parse()
+#results = json.dumps({"items":parser_res})
+#url = "https://flexgrecha.azurewebsites.net/api/parser"
+#r = requests.post(url, json = {"items":parser_res}, headers = headers, verify=False)
 # %%
