@@ -32,8 +32,9 @@ function buildChart(dateArray, chartData) {
 	});
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => process());
 
+async function process() {
 	let imgs = document.getElementsByClassName("buckwheat-image");
 	let heightStandard = imgs[0].height;
 
@@ -41,22 +42,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		imgs[i].height = heightStandard;
 	}
 
-	var url = "https://" + location.host.split(":")[0] + "/api/table";
+	var url = window.location.protocol + "//" + location.host + "/api/table";
 
-	var response = fetchAsync(url);//'{"dates": ["23.01", "22.01", "23.01"],"prices":[35.3, 32.2, 35.4] }';
+	var response = await fetchAsync(url);//'{"dates": ["23.01", "22.01", "23.01"],"prices":[35.3, 32.2, 35.4] }';
 
-	var jsonData = JSON.parse(response);
+	let dateArray = response.dates;
+	let chartData = response.prices.map(i => Number(i.replace(',', '.')));
 
-	console.log(jsonData);
-
-	let dateArray = jsonData.dates;
-	let chartData = jsonData.prices;
-
+	console.log(chartData);
+	
 	buildChart(dateArray, chartData);
-});
+}
 
 async function fetchAsync(url) {
 	let response = await fetch(url);
-	let data = await response.json();
+	let data = response.json();
 	return data;
 }
