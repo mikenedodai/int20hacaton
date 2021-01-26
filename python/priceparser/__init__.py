@@ -1,4 +1,3 @@
-#%%
 import datetime
 import logging
 
@@ -52,7 +51,7 @@ def auchan_parser():
     price = [float(span.get_text()) for span in price]
 
     item_url = soup.find_all(href=True)
-    item_url = list(set(["https://auchan.zakaz.ua/"+i['href'] for i in item_url if i['href'][:12] == "/uk/products"]))
+    item_url = list(set(["https://auchan.zakaz.ua/"+i['href'] for i in item_url if i['href'][:11] == "/uk/products"]))
     #images = soup.find_all('span', {'class' : 'jsx-725860710 product-tile__image-i'})
     #images = [span.get_text() for span in images]
 
@@ -175,17 +174,17 @@ def main_parse():
     result = []
     for idx, f in enumerate(ach_price):
         if ach_price[idx] != "None" and ach_kg_price[idx] != "None":
-            result_dict = {"StoreName": "Auchan", "Name":ach_title[idx], "StoreUrl":ach_url[idx], "ImageUrl":ach_images[idx], "Price":ach_price[idx], "PricePerKg":ach_kg_price[idx]}
+            result_dict = {"StoreName": "Auchan", "Name":ach_title[idx], "StoreUrl":"https://auchan.zakaz.ua/uk/categories/buckwheat-auchan/", "ImageUrl":ach_images[idx], "Price":ach_price[idx], "PricePerKg":ach_kg_price[idx]}
             result.append(result_dict)
 
     for idx, f in enumerate(epi_price):
         if epi_price[idx] != "None" and epi_kg_price[idx] != "None":
-            result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreUrl":epi_url[idx], "ImageUrl":epi_images[idx], "Price":epi_price[idx], "PricePerKg":epi_kg_price[idx]}
+            result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreUrl":"https://epicentrk.ua/ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/", "ImageUrl":epi_images[idx], "Price":epi_price[idx], "PricePerKg":epi_kg_price[idx]}
             result.append(result_dict)
 
     for idx, f in enumerate(foz_price):
         if foz_price[idx] != "None" and foz_kg_price[idx] != "None" and "Борошно" not in foz_title[idx]:
-            result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreUrl":foz_url[idx], "ImageUrl":foz_images[idx], "Price":foz_price[idx], "PricePerKg":foz_kg_price[idx]}
+            result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreUrl":"https://fozzyshop.ua/300143-krupa-grechnevaya", "ImageUrl":foz_images[idx], "Price":foz_price[idx], "PricePerKg":foz_kg_price[idx]}
             result.append(result_dict)
 
     return result
