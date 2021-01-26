@@ -9,15 +9,15 @@
     @{
         foreach (var item in Model)
         {
-            <div class="item-buckwheat col-xs-12 col-md-6 col-lg-4">
+            <div class="item-buckwheat col-sm-12 col-md-6 col-lg-4">
                 <div class="content row">
-                    <div class="image-wrapper col-xs-6 col-xs-12 col-lg-12">
-                        <img src="@item.ImageUrl" alt="">
+                    <div class="image-wrapper col-12">
+                        <img class="buckwheat-image" src="@item.ImageUrl" alt="">
                     </div>
-                    <div class="information col-xs-6 col-xs-12 col-lg-12">
+                    <div class="information col-12">
                         <ul>
                             <li class="item-name">Назва: @item.Name</li>
-                            <li class="item-value">Вартість: @item.Price.ToString("c")/кг</li>
+                            <li class="item-value">Вартість: @item.Price.ToString() грн/кг</li>
                             <li class="shop-name">Магазин: <a href="@item.StoreUrl">@item.StoreName</a></li>
 
                         </ul>
