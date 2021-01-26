@@ -30,7 +30,7 @@ namespace Site
         {
             services.AddControllersWithViews();
             services.AddDbContext<ItemsContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("PricesContext")));
+                options.UseSqlServer(Configuration.GetConnectionString("ItemsContext")));
             services.AddTransient<IBuckwheat, MockBuckwheatItem>();
             services.AddScoped<IItemsRepository, ItemsesRepository>();
         }
