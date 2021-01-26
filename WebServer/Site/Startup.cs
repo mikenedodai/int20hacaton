@@ -32,6 +32,7 @@ namespace Site
             services.AddDbContext<ItemsContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("PricesContext")));
             services.AddTransient<IBuckwheat, MockBuckwheatItem>();
+            services.AddScoped<IItemsRepository, ItemsesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

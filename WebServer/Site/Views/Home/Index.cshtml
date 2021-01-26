@@ -1,5 +1,4 @@
-﻿@using Site.Models
-@model IEnumerable<BuckwheatItem>
+﻿@model IEnumerable<Item>
 
 @{
     ViewData["Title"] = "Flex&Grecha";
@@ -8,18 +7,18 @@
 <section class="items row">
 
     @{
-        foreach (var buckwheat in Model)
+        foreach (var item in Model)
         {
             <div class="item-buckwheat col-sm-12 col-md-6 col-lg-4">
                 <div class="content row">
                     <div class="image-wrapper col-12">
-                        <img class="buckwheat-image" src="@buckwheat.imgUrl" alt="">
+                        <img class="buckwheat-image" src="@item.ImageUrl" alt="">
                     </div>
                     <div class="information col-12">
                         <ul>
-                            <li class="item-name">Назва: @buckwheat.name</li>
-                            <li class="item-value">Вартість: @buckwheat.price.ToString() грн/кг</li>
-                            <li class="shop-name">Магазин: @buckwheat.shopName </li>
+                            <li class="item-name">Назва: @item.Name</li>
+                            <li class="item-value">Вартість: @item.Price.ToString() грн/кг</li>
+                            <li class="shop-name">Магазин: <a href="@item.StoreUrl">@item.StoreName</a></li>
 
                         </ul>
                     </div>

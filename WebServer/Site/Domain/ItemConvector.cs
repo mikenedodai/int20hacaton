@@ -1,4 +1,5 @@
 using System;
+using Site.Models;
 
 namespace Site.Domain
 {
@@ -12,7 +13,9 @@ namespace Site.Domain
                 StoreName = itemDto.StoreName,
                 Price = itemDto.Price,
                 StoreUrl = itemDto.StoreUrl,
-                Time = timeSpan
+                Time = timeSpan,
+                ImageUrl = itemDto.ImageUrl,
+                PricePerKg = itemDto.PricePerKg
             };
         }
     }
