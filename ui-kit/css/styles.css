@@ -6,6 +6,19 @@
 body {
 	background: url("../images/buckwheat.jpg");
 	background-size: cover;
+	font-family: 'Open Sans', sans-serif;
+}
+
+body a 
+{
+	color: #4f4f4f;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+	text-align: center;
+}
+
+body a:hover {
+	color: #1d1d8d;
 }
 
 .container{
@@ -19,6 +32,7 @@ header{
 	background: #f0f0f0;
 	border-radius: 6px;
 	opacity: 85%;
+	padding-bottom: 6px;
 }
 
 header div{
@@ -31,15 +45,14 @@ header a {
 	display: block;
 	width: min-content;
 	line-height: 48pt;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 32pt;
-	color: #4f4f4f;
+	font-size: 42px;
 	text-decoration: none;
-	transition: all 0.5s;
+	transition: all 0.3s;
 }
 
 header a:hover{
 	color: #fff;
+	text-shadow: #000 0px 0 3px;
 }
 
 .items {
@@ -49,17 +62,27 @@ header a:hover{
 .item-buckwheat {
 	min-height: 100px;
 	padding: 8px;
+  	transition: visibility 0s, opacity 0.5s linear;
+}
+
+.item-buckwheat .item-name
+{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+	font-size: 18px;
+	max-width: 100%;
+	max-height: 56px;
+	overflow: hidden;
 }
 
 .item-buckwheat .image-wrapper{
 	display: block;
 }
 
-
 .item-buckwheat .image-wrapper img{
 	display: block;
 	max-width: 100%;
-	margin: 0 auto;
+	margin: 10px auto;
 }
 
 .item-buckwheat .content{
@@ -78,6 +101,13 @@ header a:hover{
 
 .item-buckwheat .content .information ul{
     list-style: none;
+}
+
+
+.item-buckwheat .content .information ul .item-value
+{
+    font-size: 22px;
+    color: #000;
 }
 
 .plot h3 {

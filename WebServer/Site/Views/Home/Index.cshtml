@@ -9,16 +9,18 @@
     @{
         foreach (var item in Model)
         {
-            <div class="item-buckwheat col-sm-12 col-md-6 col-lg-4">
+            <div class="item-buckwheat col-sm-12 col-md-6 col-lg-4 col-xl-3">
                 <div class="content row">
+                        <a class="item-name" href="">
+                            @item.Name
+                        </a>
                     <div class="image-wrapper col-12">
                         <img class="buckwheat-image" src="@item.ImageUrl" alt="">
                     </div>
                     <div class="information col-12">
                         <ul>
-                            <li class="item-name">Назва: @item.Name</li>
-                            <li class="item-value">Ціна: @item.Price.ToString()</li>
-                            <li class="item-value">Вартість за кг: @item.PricePerKg.ToString() грн/кг</li>
+                            <li>Ціна: <span class="item-value">@item.Price.ToString()</span> грн/кг</li>
+                            <li>Ціна: <span class="item-value">@item.PricePerKg.ToString()</span> грн/кг</li>
                             <li class="shop-name">Магазин: <a href="@item.StoreUrl">@item.StoreName</a></li>
                         </ul>
                     </div>
@@ -31,7 +33,7 @@
 
 <section class="plot">
     <div class="plot-container">
-        <h3>График цен на гречку</h3>
+        <h3>Графік найнижчих цін на гречку</h3>
         <canvas id="myChart"></canvas>
         <script>
 
