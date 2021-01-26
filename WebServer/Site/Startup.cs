@@ -32,7 +32,7 @@ namespace Site
             services.AddDbContext<ItemsContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ItemsContext")));
             services.AddTransient<IBuckwheat, MockBuckwheatItem>();
-            services.AddScoped<IItemsRepository, ItemsesRepository>();
+            services.AddScoped<IItemsRepository, ItemsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

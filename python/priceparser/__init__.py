@@ -1,6 +1,7 @@
 #%%
 import datetime
 import logging
+import os
 
 import requests
 from bs4 import BeautifulSoup
@@ -202,8 +203,8 @@ def main(mytimer: func.TimerRequest) -> None:
         headers = {'Content-type': 'application/json'}
         parser_res = main_parse()
         #results = json.dumps({"items":parser_res})
-        url = "https://flexgrecha.azurewebsites.net/api/parser"
-        r = requests.post(url, json = {"items":parser_res}, headers = headers, verify=False)
+        #url = "https://flexgrecha.azurewebsites.net/api/parser"
+        r = requests.post(os.environ['API_URL'], json = {"items":parser_res}, headers = headers, verify=False)
         logging.info(r)
     except Exception as e:
         logging.warning(e)
