@@ -176,8 +176,8 @@ def main_parse():
             result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreUrl":"https://epicentrk.ua/ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/", "ImageUrl":epi_images[idx], "Price":epi_price[idx], "PricePerKg":epi_kg_price[idx]}
             result.append(result_dict)
 
-    for idx, f in enumerate(ach_price):
-        if foz_price[idx] != "None" and foz_kg_price[idx] != "None":
+    for idx, f in enumerate(foz_price):
+        if foz_price[idx] != "None" and foz_kg_price[idx] != "None" and "Борошно" not in foz_title[idx]:
             result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreUrl":"https://fozzyshop.ua/300143-krupa-grechnevaya", "ImageUrl":foz_images[idx], "Price":foz_price[idx], "PricePerKg":foz_kg_price[idx]}
             result.append(result_dict)
 
@@ -194,7 +194,7 @@ def main(mytimer: func.TimerRequest) -> None:
             logging.info('The timer is past due!')
         headers = {'Content-type': 'application/json'}
         parser_res = main_parse()
-        results = json.dumps({"items":parser_res})
+        #results = json.dumps({"items":parser_res})
         url = "https://flexgrecha.azurewebsites.net/api/parser"
         r = requests.post(url, json = {"items":parser_res}, headers = headers, verify=False)
         logging.info(r)
