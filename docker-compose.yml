@@ -1,0 +1,36 @@
+version: "3.3"
+services:
+  web:
+    build: ./WebServer/
+    ports:
+        - "7777:80"
+    depends_on:
+            - mssql
+    environment:
+      ConnectionStrings__ItemsContext: "Server=tcp:mssql,1433;Database=Grecha;User ID=SA;Password=BigPassw0rd;Connection Timeout=30;"
+
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2017-CU17-ubuntu
+    ports:
+      - "1433:1433"
+    volumes:
+      - "mssqldata:/var/opt/mssql"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: 'BigPassw0rd'
+      MSSQL_IP_ADDRESS: '0.0.0.0'
+    container_name: mssql
+
+  parser:
+    build: ./python/
+    ports:
+        - "8080:80"
+    depends_on:
+            - web
+    environment:
+      API_URL: "http://localhost:7777/api/parser"
+
+
+volumes:
+  mssqldata:

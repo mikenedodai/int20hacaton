@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		imgs[i].height = heightStandard;
 	}
 
-	var url = "http://" + location.host.split(":")[0] + "/api/table";
+	var url = "https://" + location.host.split(":")[0] + "/api/table";
 
 	var response = fetchAsync(url);//'{"dates": ["23.01", "22.01", "23.01"],"prices":[35.3, 32.2, 35.4] }';
 

@@ -7,11 +7,11 @@ using Site.Models;
 
 namespace Site.Domain
 {
-    public class ItemsesRepository : IDisposable, IItemsRepository
+    public class ItemsRepository : IDisposable, IItemsRepository
     {
         private ItemsContext _dbContext;
         
-        public ItemsesRepository(ItemsContext context)
+        public ItemsRepository(ItemsContext context)
         {
             _dbContext = context;
         }
@@ -27,9 +27,9 @@ namespace Site.Domain
             _dbContext?.Dispose();
         }
 
-        public IList<Item> GetItems()
+        public IList<KeyValuePair<DateTime, decimal>> GetItems()
         {
-            return _dbContext.Items.ToList();
+            return _dbContext.Items.GroupBy(i => i.Time).Select(g => new KeyValuePair<DateTime,decimal> (g.Key, g.Min(cm => cm.Price))).ToList();
         }
 
         public IList<Item> GetLastItems()
