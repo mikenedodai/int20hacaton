@@ -6,6 +6,7 @@ services:
         - "7777:80"
     depends_on:
             - mssql
+    container_name: web
     environment:
       ConnectionStrings__ItemsContext: "Server=tcp:mssql,1433;Database=Grecha;User ID=SA;Password=BigPassw0rd;Connection Timeout=30;"
 
@@ -29,7 +30,7 @@ services:
     depends_on:
             - web
     environment:
-      API_URL: "http://localhost:7777/api/parser"
+      API_URL: "http://web:7777/api/parser"
 
 
 volumes:

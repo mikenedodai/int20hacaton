@@ -198,7 +198,7 @@ if __name__ == "__main__":
             headers = {'Content-type': 'application/json'}
             #results = json.dumps({"items":parser_res})
             #url = "https://flexgrecha.azurewebsites.net/api/parser"#os.environ["API_URL"]
-            r = requests.post("http://localhost:7777/api/parser", json = {"items":parser_res}, headers = headers, verify=False)
+            r = requests.post("http://web/api/parser", json = {"items":parser_res}, headers = headers, verify=False)
             time.sleep(60)
         except Exception as e:
             print(e)
