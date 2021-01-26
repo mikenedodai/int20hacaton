@@ -55,6 +55,9 @@ def auchan_parser():
         if a.img:
             images.append(a.img['src'])
 
+    item_url = soup.find_all(href=True)
+    item_url = list(set(["https://auchan.zakaz.ua/"+i['href'] for i in item_url if i['href'][:11] == "/uk/products"]))
+
     product_title = soup.find_all('span', {'class' : 'jsx-725860710 product-tile__title'})
     product_title = [span.get_text() for span in product_title]
 
@@ -75,7 +78,7 @@ def auchan_parser():
         else:
             per_kg_price.append("None")
 
-    return price,per_kg_price, product_title, product_weight, images
+    return price,per_kg_price, product_title, product_weight, images, item_url
 
 auchan_parser()
 # %%
@@ -86,6 +89,9 @@ def epicentric_parser():
     product_title = soup.find_all('b', {'class' : 'nc'})
     product_title = [span.get_text() for span in product_title]
     product_title = [span.replace("\n", "") for span in product_title]
+
+    item_url = soup.find_all(href=True)
+    item_url = list(set([i['href'] for i in item_url if i['href'][-4:] == "html"]))
 
     #re.sub('[^A-Za-z0-9]+', '', mystring)
 
@@ -126,6 +132,11 @@ def fozzy_parser():
     product_title = [span.get_text() for span in product_title] 
     product_title = [span.replace("\n", "") for span in product_title]
 
+    item_url = soup.find_all(href=True)
+    item_url = list(set([i['href'] for i in item_url if i['href'][-4:] == "html"]))
+    
+    #soup.find_all('a', {'class': 'thumbnail product-thumbnail'})[0]['href']
+    #thumbnail product-thumbnail
 
     #images = soup.find_all('img', {'src' : 'img-fluid  product-thumbnail-first'})
     #3images = [span.get_text() for span in images]
@@ -155,14 +166,14 @@ def fozzy_parser():
         else:
             per_kg_price.append("None")
 
-    return price,per_kg_price, product_title, product_weight, images
+    return price,per_kg_price, product_title, product_weight, images, item_url
 
 fozzy_parser()
 #%%
 def main_parse():
-    ach_price, ach_kg_price, ach_title, ach_weight, ach_images = auchan_parser()
-    epi_price, epi_kg_price, epi_title, epi_weight, epi_images = epicentric_parser()
-    foz_price, foz_kg_price, foz_title, foz_weight, foz_images = fozzy_parser()
+    ach_price, ach_kg_price, ach_title, ach_weight, ach_images, ach_url = auchan_parser()
+    epi_price, epi_kg_price, epi_title, epi_weight, epi_images, epi_url = epicentric_parser()
+    foz_price, foz_kg_price, foz_title, foz_weight, foz_images, foz_url = fozzy_parser()
 
     result = []
     for idx, f in enumerate(ach_price):
