@@ -1,8 +1,10 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Site.Domain;
 
 namespace Site.Controllers
@@ -25,14 +27,20 @@ namespace Site.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> ImportItems([FromBody] ItemsDto itemsDto)
+        public async Task<IActionResult> ImportItems()
         {
-            if (itemsDto == null)
-                return NoContent();
-            var time = DateTime.Now;
-            var items = itemsDto.items
-                .Select((item, idx) => ItemConvector.Convert(item, time));
-            return Ok(await _repository.Insert(items));
+            
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var body = await reader.ReadToEndAsync();
+                var itemsDto = JsonConvert.DeserializeObject<ItemsDto>(body);
+                if (itemsDto == null)
+                    return NoContent();
+                var time = DateTime.Now;
+                var items = itemsDto.items
+                    .Select((item, idx) => ItemConvector.Convert(item, time));
+                return Ok(await _repository.Insert(items));
+            }
         } 
     }
     

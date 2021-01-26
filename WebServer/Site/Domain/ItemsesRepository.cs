@@ -37,7 +37,7 @@ namespace Site.Domain
             var last = _dbContext.Items.OrderByDescending(x => x.Time).FirstOrDefault();
             if (last == null)
                 return new List<Item>(0);
-            return _dbContext.Items.Where(i => i.Time == last.Time).OrderBy(i => i.Price).ToList();
+            return _dbContext.Items.Where(i => i.Time == last.Time).OrderBy(i => i.PricePerKg).ToList();
         }
 
         public Item GetItem(string itemId)
