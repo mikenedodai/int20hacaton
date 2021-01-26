@@ -26,6 +26,14 @@ function buildChart(dateArray, chartData)
 
 document.addEventListener('DOMContentLoaded', function(){
 	
+	let imgs = document.getElementsByClassName("buckwheat-image");
+	let heightStandard = imgs[0].height;
+
+	for (i = 0; i < imgs.length; i++)
+	{
+		imgs[i].height = heightStandard;
+	}
+
 	let dateArray = ['21', '22', '23', '24', '25', '26'];
 	let chartData = [20, 21, 19.9, 19.1, 22.5, 20];
 

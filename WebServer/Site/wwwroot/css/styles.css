@@ -59,7 +59,8 @@ header {
 
         .item-buckwheat .image-wrapper img {
             display: block;
-            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
     .item-buckwheat .content {
@@ -69,7 +70,17 @@ header {
         opacity: 85%;
         background: #f0f0f0;
         overflow: hidden;
+        height: 100%;
     }
+
+        .item-buckwheat .content .information {
+            position: relative;
+        }
+
+            .item-buckwheat .content .information ul {
+                margin-top: 10px;
+                list-style: none;
+            }
 
 .plot h3 {
     margin: 0 auto;
