@@ -13,6 +13,7 @@ body {
 		text-decoration: none;
 		transition: all 0.3s ease-in-out;
 		text-align: center;
+		min-width: 100%;
 	}
 
 		body a:hover {
@@ -49,6 +50,7 @@ header {
 	}
 
 		header a:hover {
+			text-decoration: none;
 			color: #fff;
 			text-shadow: #000 0px 0 3px;
 		}
