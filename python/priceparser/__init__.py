@@ -17,6 +17,9 @@ def parse_weight(weight):
         int_weight = int(re.sub("\D", "", weight))
         if int_weight == 1:
             int_weight = 1000
+        if int_weight > 1000:
+            w = (re.findall("\d+", weight))
+            int_weight = int(w[1])
         return int_weight
     except:
         return "None"
