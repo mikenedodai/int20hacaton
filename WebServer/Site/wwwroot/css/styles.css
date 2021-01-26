@@ -1,105 +1,131 @@
 ﻿* {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    background: url("../images/buckwheat.jpg");
-    background-size: cover;
+	background: url("../images/buckwheat.jpg");
+	font-family: 'Open Sans', sans-serif;
 }
 
+	body a {
+		color: #4f4f4f;
+		text-decoration: none;
+		transition: all 0.3s ease-in-out;
+		text-align: center;
+	}
+
+		body a:hover {
+			color: #1d1d8d;
+		}
+
 .container {
-    margin: 1% auto;
-    max-width: 80%;
+	margin: 1% auto;
+	max-width: 80%;
 }
 
 header {
-    margin-right: 8px;
-    margin-left: 8px;
-    background: #f0f0f0;
-    border-radius: 6px;
-    opacity: 85%;
+	margin-right: 8px;
+	margin-left: 8px;
+	background: #f0f0f0;
+	border-radius: 6px;
+	opacity: 85%;
+	padding-bottom: 6px;
 }
 
-    header div {
-        margin: 0 auto;
-    }
+	header div {
+		margin: 0 auto;
+	}
 
-    header a {
-        margin: 0 auto;
-        text-align: center;
-        display: block;
-        width: min-content;
-        line-height: 48pt;
-        font-family: 'Open Sans', sans-serif;
-        font-size: 32pt;
-        color: #4f4f4f;
-        text-decoration: none;
-        transition: all 0.5s;
-    }
+	header a {
+		margin: 0 auto;
+		text-align: center;
+		display: block;
+		width: min-content;
+		line-height: 48pt;
+		font-size: 42px;
+		text-decoration: none;
+		transition: all 0.3s;
+	}
 
-        header a:hover {
-            color: #fff;
-        }
+		header a:hover {
+			color: #fff;
+			text-shadow: #000 0px 0 3px;
+		}
 
 .items {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 .item-buckwheat {
-    min-height: 100px;
-    padding: 8px;
+	min-height: 100px;
+	padding: 8px;
 }
 
-    .item-buckwheat .image-wrapper {
-        display: block;
-    }
+	.item-buckwheat .item-name {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 600;
+		font-size: 18px;
+		max-width: 100%;
+		max-height: 56px;
+		overflow: hidden;
+	}
+
+	.item-buckwheat .image-wrapper {
+		display: block;
+	}
+
+		.item-buckwheat .image-wrapper img {
+			display: block;
+			max-width: 100%;
+			margin: 10px auto;
+		}
+
+	.item-buckwheat .content {
+		padding: 8px;
+		margin: 0;
+		border-radius: 6px;
+		opacity: 85%;
+		background: #f0f0f0;
+		overflow: hidden;
+		height: 100%;
+	}
+
+		.item-buckwheat .content .information {
+			position: relative;
+		}
+
+			.item-buckwheat .content .information ul {
+				list-style: none;
+				width: fit-content;
+				margin: 0 auto;
+			}
 
 
-        .item-buckwheat .image-wrapper img {
-            display: block;
-            max-width: 100%;
-            margin: 0 auto;
-        }
-
-    .item-buckwheat .content {
-        padding: 8px;
-        margin: 0;
-        border-radius: 6px;
-        opacity: 85%;
-        background: #f0f0f0;
-        overflow: hidden;
-        height: 100%;
-    }
-
-        .item-buckwheat .content .information {
-            position: relative;
-        }
-
-            .item-buckwheat .content .information ul {
-                margin-top: 10px;
-                list-style: none;
-            }
+				.item-buckwheat .content .information ul .item-value {
+					font-size: 22px;
+					color: #000;
+				}
 
 .plot h3 {
-    margin: 0 auto;
-    text-align: center;
-    line-height: 42pt;
-    font-family: 'Open Sans', sans-serif;
-    font-style: bold;
-    font-size: 18pt;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 42pt;
+	font-family: 'Open Sans', sans-serif;
+	font-style: bold;
+	font-size: 18pt;
 }
 
 .plot .plot-container {
-    margin-right: 8px;
-    margin-left: 8px;
-    background: #f0f0f0;
-    border-radius: 6px;
-    opacity: 85%;
+	margin-right: 8px;
+	margin-left: 8px;
+	background: #f0f0f0;
+	border-radius: 6px;
+	opacity: 85%;
 }
 
 .plot-container #myChart {
-    display: block;
-    padding: 16px;
+	display: block;
+	padding: 16px;
 }
