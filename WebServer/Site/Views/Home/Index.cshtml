@@ -10,15 +10,15 @@
     @{
         foreach (var buckwheat in Model)
         {
-            <div class="item-buckwheat col-xs-12 col-md-6 col-lg-4">
+            <div class="item-buckwheat col-sm-12 col-md-6 col-lg-4">
                 <div class="content row">
-                    <div class="image-wrapper col-xs-6">
-                        <img src="@buckwheat.imgUrl" alt="">
+                    <div class="image-wrapper col-12">
+                        <img class="buckwheat-image" src="@buckwheat.imgUrl" alt="">
                     </div>
-                    <div class="information col-xs-6">
+                    <div class="information col-12">
                         <ul>
                             <li class="item-name">Назва: @buckwheat.name</li>
-                            <li class="item-value">Вартість: @buckwheat.price.ToString("c")/кг</li>
+                            <li class="item-value">Вартість: @buckwheat.price.ToString() грн/кг</li>
                             <li class="shop-name">Магазин: @buckwheat.shopName </li>
 
                         </ul>
