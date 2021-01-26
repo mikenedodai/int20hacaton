@@ -8,7 +8,6 @@ import random
 import gc
 import json
 import re
-import azure.functions as func
 
 #%%
 def parse_weight(weight):
@@ -189,7 +188,12 @@ def main_parse():
 
     return result
 
-
+def init(API_URL):
+    parser_res = main_parse()
+    headers = {'Content-type': 'application/json'}
+    #results = json.dumps({"items":parser_res})
+    #url = "https://flexgrecha.azurewebsites.net/api/parser"
+    r = requests.post(API_URL, json = {"items":parser_res}, headers = headers, verify=False)
 #main_parse()
 #%%
 '''for i in range(len(ach_price)):
