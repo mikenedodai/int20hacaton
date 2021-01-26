@@ -1,5 +1,6 @@
-import datetime
 import logging
+from threading import Timer
+import os
 
 import requests
 from bs4 import BeautifulSoup
@@ -9,6 +10,7 @@ import gc
 import json
 import re
 
+from datetime import datetime, timedelta
 #%%
 def parse_weight(weight):
     try:
@@ -187,14 +189,21 @@ def main_parse():
             result.append(result_dict)
 
     return result
-
-def init(API_URL):
-    parser_res = main_parse()
-    headers = {'Content-type': 'application/json'}
-    #results = json.dumps({"items":parser_res})
-    #url = "https://flexgrecha.azurewebsites.net/api/parser"
-    r = requests.post(API_URL, json = {"items":parser_res}, headers = headers, verify=False)
+#%%
+if __name__ == "__main__":
+    while True:
+        try:
+            parser_res = main_parse()
+            #print(os.environ)
+            headers = {'Content-type': 'application/json'}
+            #results = json.dumps({"items":parser_res})
+            #url = "https://flexgrecha.azurewebsites.net/api/parser"#os.environ["API_URL"]
+            r = requests.post("http://localhost:7777/api/parser", json = {"items":parser_res}, headers = headers, verify=False)
+            time.sleep(60)
+        except Exception as e:
+            print(e)
 #main_parse()
+#init("https://flexgrecha.azurewebsites.net/api/parser")
 #%%
 '''for i in range(len(ach_price)):
     print("\n")
@@ -217,3 +226,4 @@ for i in range(len(foz_weight)):
     except Exception as e:
         print(e)
 '''
+# %%
