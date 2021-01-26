@@ -164,16 +164,19 @@ def main_parse():
 
     result = []
     for idx, f in enumerate(ach_price):
-        result_dict = {"StoreName": "Auchan", "Name":ach_title[idx], "StoreUrl":"none", "ImageUrl":ach_images[idx], "Price":ach_price[idx], "PricePerKg":ach_kg_price[idx]}
-        result.append(result_dict)
+        if ach_price[idx] != "None" and ach_kg_price[idx] != "None":
+            result_dict = {"StoreName": "Auchan", "Name":ach_title[idx], "StoreUrl":"https://auchan.zakaz.ua/uk/categories/buckwheat-auchan/", "ImageUrl":ach_images[idx], "Price":ach_price[idx], "PricePerKg":ach_kg_price[idx]}
+            result.append(result_dict)
 
     for idx, f in enumerate(epi_price):
-        result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreUrl":"none", "ImageUrl":epi_images[idx], "Price":epi_price[idx], "PricePerKg":epi_kg_price[idx]}
-        result.append(result_dict)
+        if epi_price[idx] != "None" and epi_kg_price[idx] != "None":
+            result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreUrl":"https://epicentrk.ua/ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/", "ImageUrl":epi_images[idx], "Price":epi_price[idx], "PricePerKg":epi_kg_price[idx]}
+            result.append(result_dict)
 
     for idx, f in enumerate(ach_price):
-        result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreUrl":"none", "ImageUrl":foz_images[idx], "Price":foz_price[idx], "PricePerKg":foz_kg_price[idx]}
-        result.append(result_dict)
+        if foz_price[idx] != "None" and foz_kg_price[idx] != "None":
+            result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreUrl":"https://fozzyshop.ua/300143-krupa-grechnevaya", "ImageUrl":foz_images[idx], "Price":foz_price[idx], "PricePerKg":foz_kg_price[idx]}
+            result.append(result_dict)
 
     return result
 
@@ -188,17 +191,9 @@ def main(mytimer: func.TimerRequest) -> None:
             logging.info('The timer is past due!')
             headers = {'Content-type': 'application/json'}
             parser_res = main_parse()
-            results = json.dumps({"items":parser_res}, ensure_ascii=False)
+            results = json.dumps({"items":parser_res})
             url = "https://flexgrecha.azurewebsites.net/api/parser"
-            requests.post(url, data=results, headers = headers)
+            r = requests.post(url, json = {"items":parser_res}, headers = headers, verify=False)
+            logging.info(r)
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
-# %%
-headers = {'Content-type': 'application/json'}
-parser_res = main_parse()
-results = json.dumps({"items":parser_res})
-url = "https://flexgrecha.azurewebsites.net/api/parser"
-r = requests.post(url, data=json.dumps(results, ensure_ascii=False).encode('utf-8'), headers = headers, verify=False)
-print(r)
-# %%
-json.dumps(results, ensure_ascii=False).encode('utf-8')
 # %%
