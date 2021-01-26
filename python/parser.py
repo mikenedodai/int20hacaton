@@ -74,7 +74,7 @@ def auchan_parser():
 
     return price,per_kg_price, product_title, product_weight, images
 
-#auchan_parser()
+auchan_parser()
 # %%
 def epicentric_parser():
     url = requests.get('https://epicentrk.ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/')
@@ -82,6 +82,9 @@ def epicentric_parser():
 
     product_title = soup.find_all('b', {'class' : 'nc'})
     product_title = [span.get_text() for span in product_title]
+    product_title = [span.replace("\n", "") for span in product_title]
+
+    #re.sub('[^A-Za-z0-9]+', '', mystring)
 
     #images = soup.find_all('a', {'class' : 'card__photo'})
     #images = [span['img'] for span in images]
@@ -110,7 +113,7 @@ def epicentric_parser():
             per_kg_price.append("None")
 
     return price, per_kg_price, product_title, product_weight, images
-#epicentric_parser()
+epicentric_parser()
 # %%
 def fozzy_parser():
     url = requests.get('https://fozzyshop.ua/300143-krupa-grechnevaya')
@@ -118,6 +121,8 @@ def fozzy_parser():
 
     product_title =  soup.find_all('div', {'class' : 'h3 product-title'})
     product_title = [span.get_text() for span in product_title] 
+    product_title = [span.replace("\n", "") for span in product_title]
+
 
     #images = soup.find_all('img', {'src' : 'img-fluid  product-thumbnail-first'})
     #3images = [span.get_text() for span in images]
@@ -149,7 +154,7 @@ def fozzy_parser():
 
     return price,per_kg_price, product_title, product_weight, images
 
-#fozzy_parser()
+fozzy_parser()
 #%%
 def main_parse():
     ach_price, ach_kg_price, ach_title, ach_weight, ach_images = auchan_parser()

@@ -6,7 +6,6 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import random
-from tqdm import tqdm_notebook as tqdm
 import gc
 import json
 import re
@@ -59,6 +58,7 @@ def auchan_parser():
 
     product_title = soup.find_all('span', {'class' : 'jsx-725860710 product-tile__title'})
     product_title = [span.get_text() for span in product_title]
+    product_title = [span.replace("\n", "") for span in product_title]
 
     product_weight = soup.find_all('div', {'class' : 'jsx-725860710 product-tile__weight'})
     product_weight = [span.get_text() for span in product_weight]
@@ -87,6 +87,8 @@ def epicentric_parser():
 
     product_title = soup.find_all('b', {'class' : 'nc'})
     product_title = [span.get_text() for span in product_title]
+    product_title = [span.replace("\n", "") for span in product_title]
+
 
     #images = soup.find_all('a', {'class' : 'card__photo'})
     #images = [span['img'] for span in images]
@@ -123,6 +125,7 @@ def fozzy_parser():
 
     product_title =  soup.find_all('div', {'class' : 'h3 product-title'})
     product_title = [span.get_text() for span in product_title] 
+    product_title = [span.replace("\n", "") for span in product_title]
 
     #images = soup.find_all('img', {'src' : 'img-fluid  product-thumbnail-first'})
     #3images = [span.get_text() for span in images]
@@ -159,39 +162,17 @@ def main_parse():
     epi_price, epi_kg_price, epi_title, epi_weight, epi_images = epicentric_parser()
     foz_price, foz_kg_price, foz_title, foz_weight, foz_images = fozzy_parser()
 
-    '''final_prices = []
-    final_names  = []
-    final_images = []
-    final_naming = []
-
-    final_prices.extend(ach_price)
-    final_prices.extend(epi_price)
-    final_prices.extend(foz_price)
-
-    final_names.extend(ach_title)
-    final_names.extend(epi_title)
-    final_names.extend(foz_title)
-
-    final_images.extend(ach_images)
-    final_images.extend(epi_images)
-    final_images.extend(foz_images)
-
-    final_naming.extend(['Auchan' for i in range(len(ach_price))])
-    final_naming.extend(['Epicentric' for i in range(len(epi_price))])
-    final_naming.extend(['Fozzy' for i in range(len(foz_price))])
-    #filan_naming = [['Auchan' for i in range(len(ach_price))], ['Epicentric' for i in range(len(epi_price))], ['Fozzy' for i in range(len(foz_price))]]'''
-
     result = []
     for idx, f in enumerate(ach_price):
-        result_dict = {"StoreName": "Auchan", "Name":ach_title[idx], "StoreURL":"none", "ImageURL":ach_images[idx], "Price":ach_price[idx]}
+        result_dict = {"StoreName": "Auchan", "Name":ach_title[idx], "StoreUrl":"none", "ImageUrl":ach_images[idx], "Price":ach_price[idx], "PricePerKg":ach_kg_price[idx]}
         result.append(result_dict)
 
     for idx, f in enumerate(epi_price):
-        result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreURL":"none", "ImageURL":epi_images[idx], "Price":epi_price[idx]}
+        result_dict = {"StoreName": "Epicentric", "Name":epi_title[idx], "StoreUrl":"none", "ImageUrl":epi_images[idx], "Price":epi_price[idx], "PricePerKg":epi_kg_price[idx]}
         result.append(result_dict)
 
     for idx, f in enumerate(ach_price):
-        result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreURL":"none", "ImageURL":foz_images[idx], "Price":foz_price[idx]}
+        result_dict = {"StoreName": "Fozzy", "Name":foz_title[idx], "StoreUrl":"none", "ImageUrl":foz_images[idx], "Price":foz_price[idx], "PricePerKg":foz_kg_price[idx]}
         result.append(result_dict)
 
     return result
@@ -204,12 +185,20 @@ def main(mytimer: func.TimerRequest) -> None:
         tzinfo=datetime.timezone.utc).isoformat()
 
     if mytimer.past_due:
-        try:
             logging.info('The timer is past due!')
-            results = json.dumps({"items":main_parse()}, ensure_ascii=False) 
+            headers = {'Content-type': 'application/json'}
+            parser_res = main_parse()
+            results = json.dumps({"items":parser_res}, ensure_ascii=False)
             url = "https://flexgrecha.azurewebsites.net/api/parser"
-            request.post(url, json=results)
-            #logging.info(f'result:'results
-        except Exception as e:
-            logging.info(e)
+            requests.post(url, data=results, headers = headers)
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
+# %%
+headers = {'Content-type': 'application/json'}
+parser_res = main_parse()
+results = json.dumps({"items":parser_res})
+url = "https://flexgrecha.azurewebsites.net/api/parser"
+r = requests.post(url, data=json.dumps(results, ensure_ascii=False).encode('utf-8'), headers = headers, verify=False)
+print(r)
+# %%
+json.dumps(results, ensure_ascii=False).encode('utf-8')
+# %%

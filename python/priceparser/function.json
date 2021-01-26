@@ -5,7 +5,11 @@
       "name": "mytimer",
       "type": "timerTrigger",
       "direction": "in",
-      "schedule": "0 */5 * * * *"
+      "methods": [
+        "get",
+        "post"
+      ],
+      "schedule": "0 */1 * * * *"
     }
   ]
 }
