@@ -29,7 +29,7 @@ namespace Site.Domain
 
         public IList<KeyValuePair<DateTime, decimal>> GetItems()
         {
-            return _dbContext.Items.GroupBy(i => i.Time).Select(g => new KeyValuePair<DateTime,decimal> (g.Key, g.Min(cm => cm.Price))).ToList();
+            return _dbContext.Items.GroupBy(i => i.Time).Select(g => new KeyValuePair<DateTime,decimal> (g.Key, g.Min(cm => cm.PricePerKg))).ToList();
         }
 
         public IList<Item> GetLastItems()
